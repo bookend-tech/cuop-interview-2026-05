@@ -7,6 +7,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./hidden_expected.min.js"></script>
     <style>
       :root {
         color-scheme: light;
@@ -264,21 +265,19 @@
 
         const runIncrement = () => {
           setLastAction("1 증가: 실제 count와 기대 count가 각각 1씩 증가해야 합니다.");
-          setExpectedCount((prevCount) => prevCount + 1);
+          window.__hidden.incExpected(setExpectedCount);
           increment();
         };
 
         const runIncrementTwice = () => {
           setLastAction("두 번 증가: 버튼을 한 번 눌렀을 때 2 증가해야 합니다.");
-          setExpectedCount((prevCount) => prevCount + 2);
+          window.__hidden.incExpectedTwice(setExpectedCount);
           incrementTwice();
         };
 
         const runAsyncIncrement = () => {
           setLastAction("비동기 증가 예약: 0.6초 후 최신 count 기준으로 1 증가해야 합니다.");
-          setTimeout(() => {
-            setExpectedCount((prevCount) => prevCount + 1);
-          }, 600);
+          window.__hidden.incExpectedAsync(setExpectedCount);
           incrementFromAsyncCallback();
         };
 

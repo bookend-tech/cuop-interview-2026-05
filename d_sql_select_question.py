@@ -21,7 +21,6 @@ def get_sql() -> str:
     return """
         SELECT name
         FROM users
-        WHERE age < 20
         ORDER BY id;
     """
     # 여기까지 코드를 수정하세요
