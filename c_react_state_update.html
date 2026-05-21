@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React State Update Interview Question</title>
+    <title>React State Update Practical Question</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -26,25 +26,38 @@
       }
 
       main {
-        width: min(1120px, calc(100% - 32px));
+        width: min(1040px, calc(100% - 32px));
         margin: 0 auto;
         padding: 32px 0 48px;
       }
 
-      header {
-        margin-bottom: 24px;
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
       }
 
       h1 {
-        margin: 0 0 8px;
-        font-size: clamp(28px, 4vw, 44px);
+        margin-bottom: 8px;
+        font-size: clamp(28px, 4vw, 42px);
         line-height: 1.1;
         letter-spacing: 0;
       }
 
-      p {
-        margin: 0;
-        line-height: 1.6;
+      h2 {
+        font-size: 20px;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        font-size: 15px;
+        letter-spacing: 0;
+      }
+
+      p,
+      li {
+        line-height: 1.65;
       }
 
       .intro {
@@ -52,11 +65,11 @@
         color: #4b5563;
       }
 
-      .grid {
+      .layout {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
         gap: 16px;
-        margin: 24px 0;
+        margin-top: 24px;
       }
 
       .panel {
@@ -66,38 +79,13 @@
         overflow: hidden;
       }
 
-      .panel header {
+      .panel-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin: 0;
         padding: 16px;
         border-bottom: 1px solid #e5eaf0;
-      }
-
-      h2 {
-        margin: 0;
-        font-size: 18px;
-        letter-spacing: 0;
-      }
-
-      .badge {
-        flex: 0 0 auto;
-        border-radius: 999px;
-        padding: 4px 10px;
-        font-size: 12px;
-        font-weight: 700;
-      }
-
-      .bad {
-        color: #9f1239;
-        background: #ffe4e6;
-      }
-
-      .good {
-        color: #166534;
-        background: #dcfce7;
       }
 
       .content {
@@ -106,20 +94,50 @@
 
       .counter {
         display: grid;
-        gap: 12px;
-        margin-bottom: 16px;
+        gap: 14px;
+      }
+
+      .scoreboard {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .score {
+        border: 1px solid #d9e0e8;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fafc;
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 4px;
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 700;
       }
 
       .number {
-        display: grid;
-        place-items: center;
-        min-height: 92px;
-        border: 1px solid #d9e0e8;
-        border-radius: 8px;
-        background: #f8fafc;
-        font-size: 42px;
+        font-size: 40px;
         font-weight: 800;
         font-variant-numeric: tabular-nums;
+      }
+
+      .status {
+        border-radius: 8px;
+        padding: 12px;
+        font-weight: 800;
+      }
+
+      .pass {
+        color: #166534;
+        background: #dcfce7;
+      }
+
+      .fail {
+        color: #9f1239;
+        background: #ffe4e6;
       }
 
       .actions {
@@ -145,8 +163,24 @@
         background: #f8fafc;
       }
 
+      .primary {
+        border-color: #2563eb;
+        color: #ffffff;
+        background: #2563eb;
+      }
+
+      .primary:hover {
+        border-color: #1d4ed8;
+        background: #1d4ed8;
+      }
+
+      .note {
+        color: #4b5563;
+        font-size: 14px;
+      }
+
       pre {
-        margin: 0;
+        margin: 12px 0 0;
         overflow: auto;
         border-radius: 8px;
         padding: 14px;
@@ -156,34 +190,34 @@
         line-height: 1.45;
       }
 
-      .question {
-        border: 1px solid #cfd8e3;
-        border-radius: 8px;
-        background: #ffffff;
-        padding: 18px;
-      }
-
-      .question h2 {
-        margin-bottom: 10px;
-      }
-
       ol {
-        margin: 10px 0 0;
+        margin: 12px 0 0;
         padding-left: 22px;
-        line-height: 1.7;
       }
 
       li + li {
         margin-top: 4px;
       }
 
-      @media (max-width: 760px) {
+      details {
+        margin-top: 14px;
+        border-top: 1px solid #e5eaf0;
+        padding-top: 14px;
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 800;
+      }
+
+      @media (max-width: 820px) {
         main {
-          width: min(100% - 24px, 1120px);
+          width: min(100% - 24px, 1040px);
           padding-top: 24px;
         }
 
-        .grid {
+        .layout,
+        .scoreboard {
           grid-template-columns: 1fr;
         }
       }
@@ -192,10 +226,10 @@
   <body>
     <main>
       <header>
-        <h1>React 상태 업데이트 면접 문제</h1>
+        <h1>React 상태 업데이트 실습 문제</h1>
         <p class="intro">
-          버튼을 눌러 잘못된 업데이트와 함수형 업데이트의 차이를 확인하세요.
-          특히 "두 번 증가" 버튼에서 React의 상태 배치 처리와 이전 상태 참조 문제가 드러납니다.
+          이 파일을 브라우저에서 열어 동작을 확인한 뒤, 소스 코드의
+          <strong>TODO 영역</strong>만 수정해서 실제 count가 기대 count와 항상 같아지도록 만드세요.
         </p>
       </header>
 
@@ -205,86 +239,93 @@
     <script type="text/babel">
       const { useState } = React;
 
-      function BadCounter() {
+      function CandidateCounter() {
         const [count, setCount] = useState(0);
+        const [expectedCount, setExpectedCount] = useState(0);
+        const [lastAction, setLastAction] = useState("아직 실행한 동작이 없습니다.");
 
         const increment = () => {
+          // TODO: 이 구현을 올바른 React state 업데이트 방식으로 수정하세요.
           setCount(count + 1);
         };
 
         const incrementTwice = () => {
+          // TODO: 버튼을 한 번 눌렀을 때 count가 정확히 2 증가하도록 수정하세요.
           setCount(count + 1);
           setCount(count + 1);
         };
 
+        const incrementFromAsyncCallback = () => {
+          // TODO: 예약한 뒤 다른 버튼을 눌러도 최신 count 기준으로 1 증가하도록 수정하세요.
+          setTimeout(() => {
+            setCount(count + 1);
+          }, 600);
+        };
+
+        const runIncrement = () => {
+          setLastAction("1 증가: 실제 count와 기대 count가 각각 1씩 증가해야 합니다.");
+          setExpectedCount((prevCount) => prevCount + 1);
+          increment();
+        };
+
+        const runIncrementTwice = () => {
+          setLastAction("두 번 증가: 버튼을 한 번 눌렀을 때 2 증가해야 합니다.");
+          setExpectedCount((prevCount) => prevCount + 2);
+          incrementTwice();
+        };
+
+        const runAsyncIncrement = () => {
+          setLastAction("비동기 증가 예약: 0.6초 후 최신 count 기준으로 1 증가해야 합니다.");
+          setTimeout(() => {
+            setExpectedCount((prevCount) => prevCount + 1);
+          }, 600);
+          incrementFromAsyncCallback();
+        };
+
+        const reset = () => {
+          setCount(0);
+          setExpectedCount(0);
+          setLastAction("초기화했습니다.");
+        };
+
+        const isPassing = count === expectedCount;
+
         return (
-          <section className="panel" aria-label="잘못된 상태 업데이트 예시">
-            <header>
-              <h2>Incorrect Approach</h2>
-              <span className="badge bad">stale value</span>
-            </header>
-            <div className="content">
-              <div className="counter">
-                <div className="number">{count}</div>
-                <div className="actions">
-                  <button type="button" onClick={increment}>1 증가</button>
-                  <button type="button" onClick={incrementTwice}>두 번 증가</button>
-                  <button type="button" onClick={() => setCount(0)}>초기화</button>
-                </div>
-              </div>
-              <pre>{`const [count, setCount] = React.useState(0);
-
-const increment = () => {
-  count++; // Direct mutation
-  setCount(count);
-};
-
-const incrementTwice = () => {
-  setCount(count + 1);
-  setCount(count + 1);
-};`}</pre>
+          <section className="panel" aria-label="React state update practical question">
+            <div className="panel-header">
+              <h2>실행 확인</h2>
+              <span className={isPassing ? "status pass" : "status fail"}>
+                {isPassing ? "PASS" : "FAIL"}
+              </span>
             </div>
-          </section>
-        );
-      }
-
-      function GoodCounter() {
-        const [count, setCount] = useState(0);
-
-        const increment = () => {
-          setCount((prevCount) => prevCount + 1);
-        };
-
-        const incrementTwice = () => {
-          setCount((prevCount) => prevCount + 1);
-          setCount((prevCount) => prevCount + 1);
-        };
-
-        return (
-          <section className="panel" aria-label="올바른 상태 업데이트 예시">
-            <header>
-              <h2>Correct Approach</h2>
-              <span className="badge good">functional update</span>
-            </header>
             <div className="content">
               <div className="counter">
-                <div className="number">{count}</div>
+                <div className="scoreboard">
+                  <div className="score">
+                    <span className="label">실제 count</span>
+                    <span className="number">{count}</span>
+                  </div>
+                  <div className="score">
+                    <span className="label">기대 count</span>
+                    <span className="number">{expectedCount}</span>
+                  </div>
+                </div>
+
+                <p className="note">{lastAction}</p>
+
                 <div className="actions">
-                  <button type="button" onClick={increment}>1 증가</button>
-                  <button type="button" onClick={incrementTwice}>두 번 증가</button>
-                  <button type="button" onClick={() => setCount(0)}>초기화</button>
+                  <button className="primary" type="button" onClick={runIncrement}>
+                    1 증가
+                  </button>
+                  <button className="primary" type="button" onClick={runIncrementTwice}>
+                    두 번 증가
+                  </button>
+                  <button className="primary" type="button" onClick={runAsyncIncrement}>
+                    비동기 증가 예약
+                  </button>
+                  <button type="button" onClick={reset}>초기화</button>
                 </div>
               </div>
-              <pre>{`const [count, setCount] = React.useState(0);
-
-const increment = () => {
-  setCount((prevCount) => prevCount + 1);
-};
-
-const incrementTwice = () => {
-  setCount((prevCount) => prevCount + 1);
-  setCount((prevCount) => prevCount + 1);
-};`}</pre>
             </div>
           </section>
         );
@@ -292,25 +333,56 @@ const incrementTwice = () => {
 
       function App() {
         return (
-          <>
-            <div className="grid">
-              <BadCounter />
-              <GoodCounter />
-            </div>
+          <div className="layout">
+            <section className="panel">
+              <div className="panel-header">
+                <h2>과제</h2>
+              </div>
+              <div className="content">
+                <p>
+                  아래 세 함수의 <strong>TODO 영역</strong>을 직접 수정하세요.
+                  수정 후 브라우저를 새로고침하고 모든 버튼 동작에서 PASS가 유지되어야 합니다.
+                </p>
+                <ol>
+                  <li><code>increment</code>: count를 1 증가시킵니다.</li>
+                  <li><code>incrementTwice</code>: 버튼 한 번에 count를 정확히 2 증가시킵니다.</li>
+                  <li>
+                    <code>incrementFromAsyncCallback</code>: 예약 후 다른 버튼을 눌러도 최신 count를 기준으로
+                    1 증가시킵니다.
+                  </li>
+                </ol>
 
-            <section className="question">
-              <h2>면접 질문</h2>
-              <p>
-                위 두 코드를 비교해서 React에서 상태를 직접 변경하면 왜 문제가 되는지,
-                그리고 함수형 업데이트가 어떤 상황에서 더 안전한지 설명하세요.
-              </p>
-              <ol>
-                <li>React state를 직접 수정하면 안 되는 이유는 무엇인가요?</li>
-                <li>연속으로 상태를 업데이트할 때 왜 이전 상태 값을 인자로 받아야 하나요?</li>
-                <li>객체나 배열 state에서는 같은 문제가 어떻게 나타날 수 있나요?</li>
-              </ol>
+                <details>
+                  <summary>힌트</summary>
+                  <p className="note">
+                    새 상태가 이전 상태에 의존한다면, 현재 렌더의 <code>count</code> 값을 직접 참조하는 방식이
+                    안전하지 않을 수 있습니다.
+                  </p>
+                </details>
+
+                <h3 style={{ marginTop: 18 }}>수정 대상 코드</h3>
+                <pre>{`const increment = () => {
+  // TODO: 이 구현을 올바른 React state 업데이트 방식으로 수정하세요.
+  setCount(count + 1);
+};
+
+const incrementTwice = () => {
+  // TODO: 버튼을 한 번 눌렀을 때 count가 정확히 2 증가하도록 수정하세요.
+  setCount(count + 1);
+  setCount(count + 1);
+};
+
+const incrementFromAsyncCallback = () => {
+  // TODO: 예약한 뒤 다른 버튼을 눌러도 최신 count 기준으로 1 증가하도록 수정하세요.
+  setTimeout(() => {
+    setCount(count + 1);
+  }, 600);
+};`}</pre>
+              </div>
             </section>
-          </>
+
+            <CandidateCounter />
+          </div>
         );
       }
 
